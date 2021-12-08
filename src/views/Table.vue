@@ -1,6 +1,6 @@
 <template>
   <div class="table">
-    <h1>This is an table page</h1>
+    <h1>This is a table page</h1>
     <Table />
   </div>
 </template>
