@@ -1,11 +1,11 @@
 <template>
   <div>
-    <table>
+    <table style="margin: auto">
       <thead>
         <tr>
-          <th>nama</th>
-          <th>sdsa</th>
-          <th>dsadas</th>
+          <th>email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
         </tr>
       </thead>
       <tbody v-for="person in persons" :key="person.id">
@@ -23,26 +23,25 @@
 import axios from "axios";
 export default {
   name: "table",
-  // state: {
-  //   persons: [],
-  // },
   data() {
     return {
       persons: [],
     };
   },
+  methods: {
+    async fetchUser() {
+      try {
+        const req = await axios.get("https://reqres.in/api/users");
+        const res = await req.data.data;
+        this.persons = res;
+      } catch (error) {
+        alert(error);
+      }
+    },
+  },
 
-  mounted: async () => {
-    try {
-      const req = await axios.get("https://reqres.in/api/users");
-      const res = await req.data.data;
-      // eslint-disable-next-line no-console
-      console.log(res);
-      this.data().persons = res;
-    } catch (error) {
-      alert(error);
-    }
-    // this.fetchUser();
+  mounted() {
+    this.fetchUser();
   },
 };
 </script>
